@@ -1,0 +1,8 @@
+myapp:
+    filesPath: src/main/resources/questions.csv
+    answers:
+      - 1
+      - 2
+      - 1
+      - 1
+      - 2
