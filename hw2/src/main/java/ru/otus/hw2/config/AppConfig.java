@@ -2,6 +2,7 @@ package ru.otus.hw2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.otus.hw2.AppBean;
 import ru.otus.hw2.model.Answers;
 import ru.otus.hw2.model.Student;
 import ru.otus.hw2.model.Test;
@@ -46,6 +47,10 @@ public class AppConfig {
     @Bean
     public TestGetterService messageService() {
         return new TestGetterService();
+    }
+    @Bean
+    public AppBean appBean() {
+        return new AppBean(studentService(),testChecker(), localizeService());
     }
 
 }
