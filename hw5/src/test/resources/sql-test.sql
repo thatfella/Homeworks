@@ -1,0 +1,1 @@
+insert into Author  values ( 222, 'Eckel' ), (333, 'Homer')
