@@ -8,7 +8,7 @@ import ru.otus.hw6.model.Book;
 
 @Service
 public class BookService {
-    private BookRepo bookRepo;
+    private BookRepo  bookRepo;
 
     @Autowired
     public BookService(BookRepo bookRepo) {
