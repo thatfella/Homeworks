@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table border="2" >
+<tr>
+<th>Id</th>
+<th>Text</th>
+<th>Book</th>
+<th></th>
+</tr>
+<tr th:each="comment: ${comments}">
+<td th:text="${comment.commentid}">id</td>
+<td th:text="${comment.text}">name</td>
+<td th:text="${comment.book.name}">id</td>
+<td>
+ <a th:href="@{'/comment?id=' + ${comment.commentid}}"> profile</a>
+</td>
+</tr>
+
+</table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action = "#" th:action="@{/editcomment}" th:object="${comment}" method="post">
+<input type="hidden" th:field="*{commentid}"/>
+<p>Name: <input type="text" th:field="*{text}" /></p>
+<p>
+
+<select th:field="*{book}">
+  <option
+      th:each="book: ${books}"
+      th:value="${book.id}"
+      th:text="${book.name}" ></option>
+</select>
+</p>
+        <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
