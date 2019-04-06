@@ -1,6 +1,7 @@
 package ru.otus.hw9;
 
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(AuthorController.class)
-public class Hw9WebTests {
+public class AuthorControllerTests {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
     private AuthorService authorService;
+
 
 
     @Test
