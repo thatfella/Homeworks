@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>genres</title>
+  <style type="text/css">
+  .genres td {
+              border: 10px solid blue;
+          }
+</style>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>genres Form</h1>
+
+        <div id="feedback"></div>
+
+        <form class="form-horizontal" id="add-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Id</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="genreId"/>
+                </div>
+            </div>
+
+            <div class="form-group form-group-lg">
+            <label class="col-sm-2 control-label">genre</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="genreName"/>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="btn-add"
+                            class="btn btn-primary btn-lg">add
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <table id="genres" border="5" bgcolor="#add8e6">
+    <thead>
+    <tr>
+    <td>ID</td>
+    <td>Name</td>
+    </tr>
+</thead>
+<tbody>
+
+</tbody>
+
+
+</table>
+
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $("#add-form").submit(function (event) {
+
+event.preventDefault();
+
+        fire_ajax_submit();
+
+    });
+
+})
+function fire_ajax_submit() {
+
+    var genre = {
+        genreId: $("#genreId").val(),
+        genreName : $("#genreName").val()
+    }
+
+    $("#btn-add").prop("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/addgenre",
+        data: JSON.stringify(genre),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            console.log("SUCCESS : ", data);
+            showAllgenres();
+            $("#btn-add").prop("disabled", false);
+        }
+    })
+
+}
+
+    function showAllgenres() {
+            $.get("/allgenres").done(function (genres) {
+                $("#genres tbody").empty();
+                genres.forEach(function (genre) {
+                    $("#genres tbody").append(`
+                        <tr>
+                            <td>${genre.genreId}</td>
+                            <td>${genre.genreName}</td>
+                            <td><button style=" color: green" onclick="editgenre(${genre.genreId})" >Edit</button></td>
+                            <td><button style=" color: red"  onclick="deletegenre(${genre.genreId})">Delete</button></td>
+
+                                       </tr>
+                    `)
+                });
+            })
+        }
+
+        function deletegenre(id) {
+                $.ajax({
+                    url: '/deletegenre?id=' + id,
+                    method: 'DELETE',
+                           success: function() {
+                               showAllgenres();
+                           },
+                           error: function (error) {
+                               alert(error);
+                           }
+                       })
+         }
+
+         function editgenre(genreId) {
+           alert("You are editing genre with id - " + ( genreId ));
+           var t = document.getElementById('genres');
+           var name = ($(t.rows[genreId].cells[1]).text());
+           var newgenreName = window.prompt("Change name", name);
+
+            var editedgenre = {
+                genreId: genreId,
+                genreName : newgenreName
+            };
+
+        $(t.rows[genreId].cells[1]).html(editedgenre.genreName);
+           $.ajax({
+               url:"/editgenre?id="+ genreId,
+               method:"PUT",
+               data: JSON.stringify(editedgenre),
+               dataType: "json",
+               contentType: "application/json",
+               success:   function(){
+                   console.log("SUCCESS : ", data);
+                   alert("succesfully updated to "+ data.genreName);
+                   showAllgenres();
+               }
+
+            })
+
+         }
+</script>
+</body>
+</html>
