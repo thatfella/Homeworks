@@ -85,7 +85,7 @@ function fire_ajax_submit() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/addgenre",
+        url: "/genres",
         data: JSON.stringify(genre),
         dataType: 'json',
         cache: false,
@@ -100,7 +100,7 @@ function fire_ajax_submit() {
 }
 
     function showAllgenres() {
-            $.get("/allgenres").done(function (genres) {
+            $.get("/genres").done(function (genres) {
                 $("#genres tbody").empty();
                 genres.forEach(function (genre) {
                     $("#genres tbody").append(`
@@ -118,8 +118,8 @@ function fire_ajax_submit() {
 
         function deletegenre(id) {
                 $.ajax({
-                    url: '/deletegenre?id=' + id,
-                    method: 'DELETE',
+                    url: "/genres/" + id,
+                    method: "DELETE",
                            success: function() {
                                showAllgenres();
                            },
@@ -142,7 +142,7 @@ function fire_ajax_submit() {
 
         $(t.rows[genreId].cells[1]).html(editedgenre.genreName);
            $.ajax({
-               url:"/editgenre?id="+ genreId,
+               url:"/genres/"+ genreId,
                method:"PUT",
                data: JSON.stringify(editedgenre),
                dataType: "json",

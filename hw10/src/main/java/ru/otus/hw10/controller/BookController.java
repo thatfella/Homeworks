@@ -31,35 +31,34 @@ public class BookController {
 
 
 
-    @GetMapping("/book")
+    @GetMapping("/books/{id}")
     public Book getBook(@RequestParam(value = "id") int id) {
         Book book = bookService.getBook(id);
         return book;
     }
 
-    @PostMapping("/addbook")
+    @PostMapping("/books")
     public Book addBookForm(@RequestBody Book book) {
         bookService.saveBook(book);
         return book;
     }
 
-    @PutMapping("/editbook")
+    @PutMapping("/books/{id}")
     public void editBookSubmit(@RequestParam(value = "id") int id, @RequestBody Book book) {
         bookService.editBook(book);
     }
 
 
-    @GetMapping("/allbooks")
+    @GetMapping("/books")
     public List<Book> allBooks() {
         List<Book> books = bookService.getAllBooks();
         return books;
     }
 
 
-    @RequestMapping("/deletebook")
-    public String deleteBook(@RequestParam(value = "id") int id) {
+    @DeleteMapping("/books/{id}")
+    public void deleteBook(@PathVariable(value = "id") int id) {
         bookService.deleteBook(id);
-        return "deleted";
     }
 
 }

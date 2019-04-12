@@ -93,7 +93,7 @@ function fire_ajax_submit() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/addbook",
+        url: "/books",
         data: JSON.stringify(book),
         dataType: 'json',
         cache: false,
@@ -108,7 +108,7 @@ function fire_ajax_submit() {
 }
 
     function showAllbooks() {
-            $.get("/allbooks").done(function (books) {
+            $.get("/books").done(function (books) {
                 $("#books tbody").empty();
                 books.forEach(function (book) {
                     $("#books tbody").append(`
@@ -126,8 +126,8 @@ function fire_ajax_submit() {
 
         function deletebook(id) {
                 $.ajax({
-                    url: '/deletebook?id=' + id,
-                    method: 'DELETE',
+                    url: "/books/" + id,
+                    method: "DELETE",
                            success: function() {
                                showAllbooks();
                            },
@@ -150,7 +150,7 @@ function fire_ajax_submit() {
 
         $(t.rows[id].cells[1]).html(editedbook.name);
            $.ajax({
-               url:"/editbook?id="+ id,
+               url:"/books/"+ id,
                method:"PUT",
                data: JSON.stringify(editedbook),
                dataType: "json",

@@ -19,34 +19,33 @@ public class GenreController {
         this.genreService = genreService;
     }
 
-    @GetMapping("/genre")
+    @GetMapping("/genres/{id}")
     public Genre getGenre(@RequestParam(value = "id") int id) {
         Genre genre = genreService.getGenre(id);
         return genre;
     }
 
-    @PostMapping("/addgenre")
+    @PostMapping("/genres")
     public Genre addGenreForm(@RequestBody Genre genre) {
         genreService.saveGenre(genre.getGenreId(), genre.getGenreName());
         return genre;
     }
 
-    @PutMapping("/editgenre")
+    @PutMapping("/genres/{id}")
     public void editGenreSubmit(@RequestParam(value = "id") int id, @RequestBody Genre genre) {
         genreService.editGenre(genre);
     }
 
 
-    @GetMapping("/allgenres")
+    @GetMapping("/genres")
     public List<Genre> allGenres() {
         List<Genre> genres = genreService.getAllGenres();
         return genres;
     }
 
 
-    @RequestMapping("/deletegenre")
-    public String deleteGenre(@RequestParam(value = "id") int id) {
+    @DeleteMapping("/genres/{id}")
+    public void deleteGenre(@PathVariable(value = "id") int id) {
         genreService.deleteGenre(id);
-        return "deleted";
     }
 }

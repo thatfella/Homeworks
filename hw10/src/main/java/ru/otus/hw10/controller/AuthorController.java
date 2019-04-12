@@ -21,35 +21,34 @@ public class AuthorController {
     }
 
 
-    @GetMapping("/author")
+    @GetMapping("/authors/{id}")
     public Author getAuthor(@RequestParam(value = "id") int id) {
         Author author = authorService.getAuthor(id);
         return author;
     }
 
-    @PostMapping("/addauthor")
+    @PostMapping("/authors")
     public Author addAuthorForm(@RequestBody Author author) {
         authorService.saveAuthor(author.getAuthorid(), author.getAuthorname());
         return author;
     }
 
-    @PutMapping("/editauthor")
+    @PutMapping("/authors/{id}")
     public void editAuthorSubmit(@RequestParam(value = "id") int id, @RequestBody Author author) {
         authorService.editAuthor(author);
 
     }
 
 
-    @GetMapping("/all")
+    @GetMapping("/authors")
     public List<Author> allAuthors() {
         List<Author> authors = authorService.getAllAuthors();
         return authors;
     }
 
 
-    @RequestMapping("/deleteAuthor")
-    public String deleteAuthor(@RequestParam(value = "id") int id) {
+    @DeleteMapping("/authors/{id}")
+    public void deleteAuthor(@PathVariable(value = "id") int id) {
         authorService.deleteAuthor(id);
-        return "deleted";
     }
 }

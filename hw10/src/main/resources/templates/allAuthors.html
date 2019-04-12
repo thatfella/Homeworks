@@ -85,7 +85,7 @@ function fire_ajax_submit() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/addauthor",
+        url: "/authors",
         data: JSON.stringify(author),
         dataType: 'json',
         cache: false,
@@ -100,7 +100,7 @@ function fire_ajax_submit() {
 }
 
     function showAllAuthors() {
-            $.get("/all").done(function (authors) {
+            $.get("/authors").done(function (authors) {
                 $("#authors tbody").empty();
                 authors.forEach(function (author) {
                     $("#authors tbody").append(`
@@ -118,8 +118,8 @@ function fire_ajax_submit() {
 
         function deleteAuthor(id) {
                 $.ajax({
-                    url: '/deleteAuthor?id=' + id,
-                    method: 'DELETE',
+                    url: "/authors/" + id,
+                    method: "DELETE",
                            success: function() {
                                showAllAuthors();
                            },
@@ -142,7 +142,7 @@ function fire_ajax_submit() {
 
         $(t.rows[authorid].cells[1]).html(editedauthor.authorname);
            $.ajax({
-               url:"/editauthor?id="+ authorid,
+               url:"/authors/"+ authorid,
                method:"PUT",
                data: JSON.stringify(editedauthor),
                dataType: "json",

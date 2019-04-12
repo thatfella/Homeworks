@@ -97,7 +97,7 @@ function fire_ajax_submit() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/addcomment",
+        url: "/comments",
         data: JSON.stringify(comment),
         dataType: 'json',
         cache: false,
@@ -116,7 +116,7 @@ function fire_ajax_submit() {
 }
 
     function showAllComments() {
-            $.get("/allcomments").done(function (comments) {
+            $.get("/comments").done(function (comments) {
                 $("#comments tbody").empty();
                 comments.forEach(function (comment) {
                     $("#comments tbody").append(`
@@ -134,8 +134,8 @@ function fire_ajax_submit() {
 
         function deleteComment(id) {
                 $.ajax({
-                    url: '/deleteComment?id=' + id,
-                    method: 'DELETE',
+                    url: "/comments/" + id,
+                    method: "DELETE",
                            success: function() {
                                showAllComments();
                            },
@@ -159,7 +159,7 @@ function fire_ajax_submit() {
         $(t.rows[commentid].cells[1]).html(editedcomment.text);
 
            $.ajax({
-               url:"/editcomment?id="+ commentid,
+               url:"/comments/"+ commentid,
                method:"PUT",
                data: JSON.stringify(editedcomment),
                dataType: "json",

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AuthorMainController {
 
-    @GetMapping("/")
+    @GetMapping("/author")
     public String welcome() {
         return "allAuthors";
     }

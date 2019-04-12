@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CommentMainController {
 
-    @GetMapping("/comments")
+    @GetMapping("/comment")
     public String welcome() {
         return "allComments";
     }

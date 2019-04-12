@@ -22,33 +22,32 @@ public class CommentController {
         this.bookService = bookService;
     }
 
-    @RequestMapping("/comment")
+    @RequestMapping("/comments/{id}")
     public Comment getComment(@RequestParam(value = "id") int id) {
         return  commentService.getComment(id);
     }
 
 
-    @PostMapping("/addcomment")
+    @PostMapping("/comments")
     public Comment addCommentSubmit(@RequestBody Comment comment) {
          commentService.saveComment(comment);
          return comment;
     }
 
 
-    @GetMapping("/allcomments")
+    @GetMapping("/comments")
     public List<Comment> allComments () {
         List<Comment> comments = commentService.getAllComments();
         return comments;
     }
 
-    @RequestMapping("/deleteComment")
-    public String deleteComment(@RequestParam(value = "id") int id) {
+    @DeleteMapping("/comments/{id}")
+    public void deleteComment(@PathVariable(value = "id") int id) {
         commentService.deleteComment(id);
-        return "deleted";
     }
 
 
-    @PutMapping("/editcomment")
+    @PutMapping("/comments/{id}")
     public String editCommentSubmit(@RequestParam(value = "id") int id, @RequestBody Comment comment) {
         commentService.updateComment(comment);
         return "getComment";
