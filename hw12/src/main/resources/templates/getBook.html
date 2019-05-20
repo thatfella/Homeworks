@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+ <head>
+    <title>Author</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+<br>
+<b>Book </b> <span th:text="${book.name}">alternativeName</th:text></span><b> with id </b> <span th:text="${book.id}">alternativeName</th:text></span>
+and <b>Author </b>  <span th:text="${book.author.name}">alternativeName</th:text></span>
+ </body>
+</html>

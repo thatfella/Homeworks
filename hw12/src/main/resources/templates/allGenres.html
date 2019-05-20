@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table border="2" >
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th></th>
+</tr>
+<tr th:each="genre: ${genres}">
+<td th:text="${genre.id}">genreId</td>
+<td th:text="${genre.genreName}">userName</td>
+<td>
+ <a th:href="@{'/genre?id=' + ${genre.id}}"> profile</a>
+</td>
+</tr>
+
+</table>
+</body>
+</html>

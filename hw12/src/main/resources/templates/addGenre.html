@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Genre</title>
+</head>
+<body>
+<form action = "#" th:action="@{/addgenre}" th:object="${genre}" method="post">
+<p>Id: <input type="text" th:field="*{id}" /></p>
+        <p>Name: <input type="text" th:field="*{genreName}" /></p>
+        <p><input type="submit" value="Submit" /></p>
+</form>
+
+</body>
+</html>
